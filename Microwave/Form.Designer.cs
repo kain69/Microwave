@@ -30,7 +30,10 @@ namespace Microwave
         private void InitializeComponent()
         {
             this.panelLeft = new System.Windows.Forms.Panel();
+            this.panelOpened = new System.Windows.Forms.Panel();
+            this.lblOpenStatus = new System.Windows.Forms.Label();
             this.panelRight = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.tableOption = new System.Windows.Forms.TableLayoutPanel();
             this.btnOpen = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
@@ -47,17 +50,14 @@ namespace Microwave
             this.btnTimeUp30 = new System.Windows.Forms.Button();
             this.btnTimeUp10 = new System.Windows.Forms.Button();
             this.lblTimer = new System.Windows.Forms.Label();
-            this.panelOpened = new System.Windows.Forms.Panel();
-            this.lblOpenStatus = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.panelLeft.SuspendLayout();
+            this.panelOpened.SuspendLayout();
             this.panelRight.SuspendLayout();
             this.tableOption.SuspendLayout();
             this.tablePower.SuspendLayout();
             this.tableTime.SuspendLayout();
-            this.panelOpened.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelLeft
@@ -70,6 +70,30 @@ namespace Microwave
             this.panelLeft.Name = "panelLeft";
             this.panelLeft.Size = new System.Drawing.Size(784, 461);
             this.panelLeft.TabIndex = 0;
+            // 
+            // panelOpened
+            // 
+            this.panelOpened.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelOpened.BackColor = System.Drawing.Color.Gray;
+            this.panelOpened.Controls.Add(this.lblOpenStatus);
+            this.panelOpened.Location = new System.Drawing.Point(11, 11);
+            this.panelOpened.Name = "panelOpened";
+            this.panelOpened.Size = new System.Drawing.Size(567, 437);
+            this.panelOpened.TabIndex = 0;
+            this.panelOpened.Visible = false;
+            // 
+            // lblOpenStatus
+            // 
+            this.lblOpenStatus.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblOpenStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblOpenStatus.Location = new System.Drawing.Point(0, 0);
+            this.lblOpenStatus.Name = "lblOpenStatus";
+            this.lblOpenStatus.Size = new System.Drawing.Size(567, 437);
+            this.lblOpenStatus.TabIndex = 0;
+            this.lblOpenStatus.Text = "Открыто";
+            this.lblOpenStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelRight
             // 
@@ -87,6 +111,16 @@ namespace Microwave
             this.panelRight.Name = "panelRight";
             this.panelRight.Size = new System.Drawing.Size(199, 461);
             this.panelRight.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(6, 308);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(188, 23);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Опции:";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableOption
             // 
@@ -331,30 +365,6 @@ namespace Microwave
             this.lblTimer.Text = "Time: 5:00\r\n\r\nPower: 100 w";
             this.lblTimer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // panelOpened
-            // 
-            this.panelOpened.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelOpened.BackColor = System.Drawing.Color.Gray;
-            this.panelOpened.Controls.Add(this.lblOpenStatus);
-            this.panelOpened.Location = new System.Drawing.Point(11, 11);
-            this.panelOpened.Name = "panelOpened";
-            this.panelOpened.Size = new System.Drawing.Size(567, 437);
-            this.panelOpened.TabIndex = 0;
-            this.panelOpened.Visible = false;
-            // 
-            // lblOpenStatus
-            // 
-            this.lblOpenStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblOpenStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblOpenStatus.Location = new System.Drawing.Point(0, 0);
-            this.lblOpenStatus.Name = "lblOpenStatus";
-            this.lblOpenStatus.Size = new System.Drawing.Size(567, 437);
-            this.lblOpenStatus.TabIndex = 0;
-            this.lblOpenStatus.Text = "Открыто";
-            this.lblOpenStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label1
             // 
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -375,16 +385,6 @@ namespace Microwave
             this.label2.TabIndex = 5;
             this.label2.Text = "Время:";
             // 
-            // label3
-            // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(6, 308);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(188, 23);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Опции:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -396,12 +396,13 @@ namespace Microwave
             this.Name = "Form";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Кармазин Влад ФИТ-3 Микроволновка";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_FormClosing);
             this.panelLeft.ResumeLayout(false);
+            this.panelOpened.ResumeLayout(false);
             this.panelRight.ResumeLayout(false);
             this.tableOption.ResumeLayout(false);
             this.tablePower.ResumeLayout(false);
             this.tableTime.ResumeLayout(false);
-            this.panelOpened.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

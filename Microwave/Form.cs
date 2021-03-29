@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -25,6 +26,12 @@ namespace Microwave
         ManualResetEvent me;
         bool isOpened;
 
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
+            IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
+        PrivateFontCollection fonts = new PrivateFontCollection();
+        Font myFont;
+
         public Form()
         {
             InitializeComponent();
@@ -32,10 +39,23 @@ namespace Microwave
             microwave = new Microwave(this);
             lblTimer.Text = microwave.TimePowerUpdate();
             isOpened = false;
+
+            byte[] fontData = Properties.Resources.LCDM2N;
+            IntPtr fontPtr = System.Runtime.InteropServices.Marshal.AllocCoTaskMem(fontData.Length);
+            System.Runtime.InteropServices.Marshal.Copy(fontData, 0, fontPtr, fontData.Length);
+            uint dummy = 0;
+            fonts.AddMemoryFont(fontPtr, Properties.Resources.LCDM2N.Length);
+            AddFontMemResourceEx(fontPtr, (uint)Properties.Resources.LCDM2N.Length, IntPtr.Zero, ref dummy);
+            System.Runtime.InteropServices.Marshal.FreeCoTaskMem(fontPtr);
+
+            myFont = new Font(fonts.Families[0], 12.0F);
+
+            lblTimer.Font = myFont;
         }
 
         private void btnTimeUp10_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             int second = 10;
             microwave.ChangeTime(second);
             lblTimer.Text = microwave.TimePowerUpdate();
@@ -43,6 +63,7 @@ namespace Microwave
 
         private void btnTimeDown10_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             int second = -10;
             microwave.ChangeTime(second);
             lblTimer.Text = microwave.TimePowerUpdate();
@@ -50,6 +71,7 @@ namespace Microwave
 
         private void btnTimeUp30_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             int second = 30;
             microwave.ChangeTime(second);
             lblTimer.Text = microwave.TimePowerUpdate();
@@ -57,6 +79,7 @@ namespace Microwave
 
         private void btnTimeDown30_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             int second = -30;
             microwave.ChangeTime(second);
             lblTimer.Text = microwave.TimePowerUpdate();
@@ -64,6 +87,7 @@ namespace Microwave
 
         private void btnTimeUp60_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             int second = 60;
             microwave.ChangeTime(second);
             lblTimer.Text = microwave.TimePowerUpdate();
@@ -71,6 +95,7 @@ namespace Microwave
 
         private void btnTimeDown60_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             int second = -60;
             microwave.ChangeTime(second);
             lblTimer.Text = microwave.TimePowerUpdate();
@@ -78,6 +103,7 @@ namespace Microwave
 
         private void btnPowerDown_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             int power = -100;
             microwave.ChangePower(power);
             lblTimer.Text = microwave.TimePowerUpdate();
@@ -85,6 +111,7 @@ namespace Microwave
 
         private void btnPowerUp_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             int power = 100;
             microwave.ChangePower(power);
             lblTimer.Text = microwave.TimePowerUpdate();
@@ -92,6 +119,7 @@ namespace Microwave
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             if (microwave.Time.TotalSeconds == 0)
                 return;
             if (Action == isAction.isStop)
@@ -111,6 +139,7 @@ namespace Microwave
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             if (Action == isAction.isStart || Action == isAction.isPause)
             {
                 Action = isAction.isStop;
@@ -122,6 +151,7 @@ namespace Microwave
 
         private void btnPause_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             if (Action == isAction.isStart)
             {
                 Action = isAction.isPause;
@@ -145,6 +175,7 @@ namespace Microwave
                     Thread.Sleep(1000);
                     Console.Beep(4000, 250);
                     Console.Beep(4000, 250);
+                    Action = isAction.isStop;
                     break;
                 }
 
@@ -173,6 +204,7 @@ namespace Microwave
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
+            ActiveControl = null;
             isOpened = !isOpened;
             if (isOpened == true)
             {
@@ -185,6 +217,11 @@ namespace Microwave
                 btnOpen.Text = "Открыть";
             }
 
+        }
+
+        private void Form_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(1);
         }
     }
 }
